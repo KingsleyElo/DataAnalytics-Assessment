@@ -1,11 +1,9 @@
 
-# SQL Case Study – Customer & Transaction Analysis
+# SQL Job Assessment – Case Study Solutions 
 
-## Overview
+## Overview 
 
-This case study addresses various real-world business questions using SQL and data from `users_customuser`, `plans_plan`, and `savings_savingsaccount` tables in a MySQL environment. The goal was to derive actionable insights around customer behavior, transaction frequency, product usage, and customer lifetime value.
-
----
+This repository contains my solutions to a SQL case study assessment. The goal is to demonstrate my proficiency in SQL and evaluate both my technical SQL skills and my problem-solving methodology.
 
 ## 1. High-Value Customers with Multiple Products
 
@@ -17,7 +15,7 @@ Identify customers who have at least one funded **savings** plan and one funded 
 - Used flags `is_regular_savings = 1` and `is_a_fund = 1` to classify plan types.  
 - Aggregated deposits from both savings and investment plans per user.  
 - Joined with the `users_customuser` table to fetch user names.  
-- Converted values from kobo to naira for reporting.
+- Converted values from Kobo to Naira for reporting.
 
 ---
 
@@ -71,7 +69,7 @@ Estimate customer CLV using account tenure and transaction volume, assuming 0.1%
 ### Question 1 – High-Value Customers with Multiple Products
 
 **Issue:**  
-Initial version didn’t filter for funded transactions per plan type correctly and didn’t aggregate across both savings and investment plans properly.
+The initial version didn’t filter for funded transactions per plan type correctly and didn’t aggregate across both savings and investment plans properly.
 
 **Fix:**  
 Used separate subqueries per plan type, applied confirmed inflow filters (`confirmed_amount > 0`), and merged them using joins and conditional counts.
@@ -101,7 +99,7 @@ Added filters `is_archived = 0` and `is_deleted = 0` in the `plans_plan` join, a
 ### Question 4 – Customer Lifetime Value (CLV) Estimation
 
 **Issue:**  
-Initial logic incorrectly equated transaction count with inflow and didn’t convert tenure to months accurately.
+The initial logic incorrectly equated transaction count with inflow and didn’t convert tenure to months accurately.
 
 **Fix:**  
 Used `PERIOD_DIFF` to calculate monthly tenure. Corrected CLV logic to use `(total_txns / tenure) * 12 * (0.1% * inflow)` and ensured all financial values were converted from kobo to naira.
@@ -110,6 +108,10 @@ Used `PERIOD_DIFF` to calculate monthly tenure. Corrected CLV logic to use `(tot
 
 ## Final Thoughts
 
-This project provided hands-on experience with analytical SQL involving multiple real-world business metrics. I learned how to manage financial data, handle date operations, and create meaningful segments for business strategy.
+- All queries were tested using MySQL.
 
-The queries have been structured with proper comments, naming conventions, and logic transparency to ensure maintainability and clarity. While there were a few missteps initially, I was able to identify and resolve each issue, leading to better understanding and stronger SQL practices.
+- Business logic was strictly followed using provided schema, hints, and assumptions (e.g., all amounts in Kobo).
+
+- The queries are designed to be clear, readable, and scalable with real-world datasets.
+
+- Comments are included for clarity on logic and transformation steps.
